@@ -52,6 +52,14 @@ func (c *HookScripts) setupInDir(path string) error {
 			continue
 		}
 
+		// Create hooks dir if it does not exist.
+		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
+			if err := os.MkdirAll(filepath.Dir(fullPath), 0644); err != nil {
+				return err
+			}
+		}
+
+		// Setup/update hooks
 		if err := ioutil.WriteFile(fullPath, []byte(script), 0755); err != nil {
 			return err
 		}
