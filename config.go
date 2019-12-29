@@ -53,7 +53,6 @@ func (c *HookScripts) setupInDir(path string) error {
 		}
 
 		if err := ioutil.WriteFile(fullPath, []byte(script), 0755); err != nil {
-			logError("hook-update", err)
 			return err
 		}
 	}
